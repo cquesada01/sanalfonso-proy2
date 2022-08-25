@@ -1,0 +1,42 @@
+{% extends './index.html' %}
+
+{% block title %}Panel estudiantes{% endblock %}
+
+{% block customCSS %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+{% endblock %}
+
+
+{% block body %}
+<script src="{{ url_for('static', filename='js/sweetalert2.all.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+{% with messages = get_flashed_messages(with_categories=True) %}
+
+{% if messages %}
+<br>
+{% for category, message in messages %}
+<!-- <div class="alert alert-danger alert-dismissible" role="alert"> -->
+<!-- <strong>{{ message }}</strong>
+<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button> -->
+    <script>showMessageAlert("{{message}}","{{category}}")</script>
+<!-- </div> -->
+
+{% endfor %}
+{% endif %}
+{% endwith %}
+
+
+<div class="text-center">
+<h1>Bienvenido, {{ current_user.fullname }}</h1>
+<br>
+<a class="btn btn-secondary" href="{{ url_for('logout') }}">Cerrar sesión</a>
+
+<br>
+
+    <h1>
+    Esta es la vista de estudiantes, solo de visualizacion
+    </h1>
+</div>
+{% endblock %}
+
+

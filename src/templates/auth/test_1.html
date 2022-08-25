@@ -1,0 +1,54 @@
+{% extends './index.html' %}
+
+{% block title %}Prueba 1{% endblock %}
+
+{% block customCSS %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+{% endblock %}
+
+{% block body %}
+<main class="form-signin w-100 m-auto text-center">
+    <form action="/test_1" method="POST">
+      <img class="mb-4" src="{{ url_for('static', filename='img/or.png') }}" alt="" width="100%" height="50%">
+      <script src="{{ url_for('static', filename='js/sweetalert2.all.min.js') }}"></script>
+      <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+      {% with messages = get_flashed_messages(with_categories=True) %}
+
+      {% if messages %}
+      <br>
+      {% for category, message in messages %}
+      <!-- <div class="alert alert-danger alert-dismissible" role="alert"> -->
+      <!-- <strong>{{ message }}</strong>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button> -->
+          <script>showMessageAlert("{{message}}","{{category}}")</script>
+      <!-- </div> -->
+      
+      {% endfor %}
+      {% endif %}
+      {% endwith %}
+
+      <h1 class="h3 mb-3 fw-normal">Cuestionario número º1</h1>
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <div class="form-floating">
+        <input type="text" class="form-control" id="floatingInput" placeholder="q1" name="q1">
+        <label for="floatingInput">pregunta º1</label>
+      </div>
+      <div class="form-floating">
+        <input type="text" class="form-control" id="floatingPassword" placeholder="q2" name="q2">
+        <label for="floatingPassword">pregunta º2</label>
+      </div>
+      <div class="form-floating">
+        <input type="text" class="form-control" id="floatingPassword" placeholder="q3" name="q3">
+        <label for="floatingPassword">pregunta º3</label>
+      </div>
+      <div class="form-floating">
+        <input type="text" class="form-control" id="floatingPassword" placeholder="q4" name="q4">
+        <label for="floatingPassword">pregunta 4º</label>
+      </div>
+  
+
+      <button class="w-100 btn btn-lg btn-primary" type="submit">Enviar respuestas</button>
+      <p class="mt-5 mb-3 text-muted">&copy; 2022</p>
+    </form>
+  </main>
+{% endblock %}
